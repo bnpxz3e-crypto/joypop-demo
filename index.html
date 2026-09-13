@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JOYPOP Style Prize Pool Demo</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#181818;color:#fff;font-family:Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
+.app{width:min(430px,100%);min-height:100vh;background:linear-gradient(#171717,#262323);padding:14px 10px 28px}
+.top{height:52px;display:flex;align-items:center;justify-content:center;position:relative}
+.back{position:absolute;left:0;width:34px;height:34px;border:0;border-radius:7px;background:#303030;color:#fff;font-size:24px}
+.logo{font-size:27px;font-weight:1000;font-style:italic;color:#ff4a28;text-shadow:2px 2px #7b170e;letter-spacing:-1px}
+.pool{border:3px solid #675b5b;border-radius:11px;background:#0c0c0c;box-shadow:0 3px 0 #000;padding:7px;margin-top:8px}
+.bar{height:28px;background:#171717;border-radius:5px 5px 0 0;text-align:center;color:#777;font-size:11px;font-weight:bold;padding-top:7px}
+.machine{height:245px;overflow:hidden;position:relative;background:radial-gradient(circle,#444,#111 68%);border:2px solid #090909}
+.machine:after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;background:#777;opacity:.28}
+.machine.instant{display:flex;align-items:center;justify-content:center}
+.single-card{width:115px;text-align:center;animation:pop .35s ease-out}
+.single-card img{width:95px;height:120px;object-fit:contain;filter:drop-shadow(0 5px 4px #000)}
+.track{display:flex;gap:10px;position:absolute;top:0;left:0;height:100%;align-items:center;transition:transform 4.5s cubic-bezier(.08,.82,.15,1)}
+.reel{width:88px;height:100%;display:flex;flex-direction:column;justify-content:space-around;align-items:center;background:linear-gradient(90deg,#090909,#252525,#090909);border-left:2px solid #000;border-right:2px solid #000;padding:12px 0}
+.reel img{width:63px;height:62px;object-fit:contain;filter:drop-shadow(0 3px 3px #000)}
+.pointer{position:absolute;z-index:5;left:50%;top:0;bottom:0;width:3px;background:#f22;box-shadow:0 0 10px #f22;transform:translateX(-50%);opacity:.8}
+.congrats{margin-top:8px;border:2px solid #574d4d;border-radius:5px;background:#050505;min-height:175px}
+.ctitle{height:35px;background:#171717;text-align:center;font-size:18px;font-weight:900;color:#aaa;padding-top:7px}
+.result{padding:12px;text-align:center;display:none}
+.result.show{display:block;animation:pop .35s}
+.result img{width:82px;height:88px;object-fit:contain;filter:drop-shadow(0 4px 3px #000)}
+.rank{display:inline-block;padding:3px 9px;border-radius:5px;font-weight:900;font-size:12px;margin-left:5px}
+.SP{background:#e92cf5}.A{background:#ffcf25;color:#111}.B{background:#35a7ff}.C{background:#8a8a8a}
+.name{font-weight:700;margin-top:3px}.price{color:#ff3a28;font-weight:900;margin-top:4px}
+.points{height:28px;margin-top:8px;background:#171717;border-radius:5px;text-align:center;padding-top:6px;color:#ddd;font-size:12px;font-weight:bold}
+.controls{display:flex;gap:7px;margin-top:16px}
+button{font-family:inherit;cursor:pointer}
+.mode,.qty{flex:1;border:1px solid #796d6d;background:#4a4141;color:#fff;border-radius:8px;padding:10px 5px;font-weight:900}
+.mode.active{background:#e83b25;border-color:#ff725f}
+.draw{width:100%;margin-top:10px;padding:15px;border:2px solid #7b160d;border-radius:10px;background:linear-gradient(#ff4d2e,#d92818);color:#fff;font-size:20px;font-weight:1000;box-shadow:0 4px 0 #66150e}
+.draw:disabled{opacity:.5}
+.skip{width:100%;margin-top:8px;padding:10px;border:1px solid #777;border-radius:8px;background:#5c5151;color:#fff;font-weight:bold}
+.info{font-size:11px;color:#999;text-align:center;margin-top:10px;line-height:1.5}
+@keyframes pop{from{transform:scale(.65);opacity:0}to{transform:scale(1);opacity:1}}
+.shake{animation:shake .45s infinite}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><button class="back">‹</button><div class="logo">PRIZE POOL</div></div>
+
+  <div class="pool">
+    <div class="bar">joypop-style free demo</div>
+    <div id="machine" class="machine instant">
+      <div id="instantCard" class="single-card"></div>
+      <div id="reels" class="track"></div>
+      <div id="pointer" class="pointer"></div>
+    </div>
+
+    <div class="congrats">
+      <div class="ctitle">CONGRATULATIONS</div>
+      <div id="result" class="result"></div>
+    </div>
+    <div class="points">Points +0.00</div>
+  </div>
+
+  <div class="controls">
+    <button class="mode active" data-mode="instant">SKIP / ทันที</button>
+    <button class="mode" data-mode="anim">ดู Animation</button>
+  </div>
+  <div class="controls">
+    <button class="qty active" data-q="1">x1</button>
+    <button class="qty" data-q="3">x3</button>
+    <button class="qty" data-q="5">x5</button>
+    <button class="qty" data-q="10">x10</button>
+  </div>
+  <button id="draw" class="draw">DRAW</button>
+  <button id="skip" class="skip">SKIP ⏩</button>
+  <div class="info">FREE DRAW DEMO — ใช้การสุ่มในเครื่อง ไม่หักเงินจริง<br>SP / A / B / C เป็นตัวอย่างสำหรับทดสอบระบบ</div>
+</div>
+
+<script>
+const prizes = {
+  SP:{rank:"SP",name:"SP Prize",price:100, chance:.2,
+      img:"https://img.joypop.gg/uploads/images/goods/85/goods2297.webp?x-oss-process=image/resize,w_400/format,webp"},
+  A:{rank:"A",name:"A Prize",price:30,chance:1.5,
+      img:"https://img.joypop.gg/uploads/images/goods/85/goods2325.webp?x-oss-process=image/resize,w_400/format,webp"},
+  B:{rank:"B",name:"B Prize",price:6,chance:28,
+      img:"https://img.joypop.gg/uploads/images/goods/85/goods2333.webp?x-oss-process=image/resize,w_400/format,webp"},
+  C:{rank:"C",name:"C Prize",price:3,chance:70.3,
+      img:"https://img.joypop.gg/uploads/images/goods/85/goods2339.webp?x-oss-process=image/resize,w_400/format,webp"}
+};
+
+let mode="instant", qty=1, current=null, busy=false;
+
+function weightedRandom(){
+  const r=Math.random()*100; let n=0;
+  for(const p of Object.values(prizes)){ n+=p.chance; if(r<n)return p; }
+  return prizes.C;
+}
+function renderResult(p){
+  result.innerHTML=`<img src="${p.img}" alt="${p.rank}">
+    <div><span class="name">${p.name}</span><span class="rank ${p.rank}">${p.rank}</span></div>
+    <div class="price">฿${p.price.toFixed(2)}</div>`;
+  result.classList.add("show");
+}
+function makeReels(){
+  reels.innerHTML="";
+  const arr=Object.values(prizes);
+  for(let c=0;c<3;c++){
+    const reel=document.createElement("div"); reel.className="reel";
+    for(let i=0;i<5;i++){
+      const p=arr[(i+c*2)%arr.length];
+      const im=document.createElement("img"); im.src=p.img; reel.appendChild(im);
+    }
+    reels.appendChild(reel);
+  }
+}
+function centerTrack(){
+  const targetIndex=12;
+  const itemW=98;
+  const center=(machine.clientWidth/2)-(itemW/2);
+  reels.style.transform=`translateX(${center-targetIndex*itemW}px)`;
+}
+function draw(){
+  if(busy)return;
+  busy=true; result.classList.remove("show"); result.innerHTML="";
+  current=weightedRandom();
+
+  if(mode==="instant"){
+    machine.className="machine instant";
+    instantCard.innerHTML=`<img src="${current.img}" alt="${current.rank}">
+      <div><span class="rank ${current.rank}">${current.rank}</span></div>`;
+    renderResult(current);
+    busy=false;
+  }else{
+    machine.className="machine shake";
+    instantCard.innerHTML="";
+    makeReels();
+    reels.style.transition="none"; reels.style.transform="translateX(0)";
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        reels.style.transition="transform 4.5s cubic-bezier(.08,.82,.15,1)";
+        // decorative reel spin; final prize is controlled by the local RNG
+        const itemW=98, target=12;
+        const center=(machine.clientWidth/2)-(itemW/2);
+        const offset=center-target*itemW;
+        reels.style.transform=`translateX(${offset}px)`;
+      });
+    });
+    setTimeout(()=>{
+      machine.className="machine";
+      renderResult(current);
+      busy=false;
+    },4700);
+  }
+}
+draw.onclick=draw;
+skip.onclick=()=>{ if(current && busy){ busy=false; machine.className="machine"; renderResult(current); } };
+
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active"); mode=b.dataset.mode;
+});
+document.querySelectorAll(".qty").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".qty").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active"); qty=+b.dataset.q;
+});
+makeReels();
+</script>
+</body>
+</html>
