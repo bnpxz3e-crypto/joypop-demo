@@ -2,170 +2,122 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JOYPOP Style Prize Pool Demo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>JOYPOP High Drops Demo</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#181818;color:#fff;font-family:Arial,sans-serif;min-height:100vh;display:flex;justify-content:center}
-.app{width:min(430px,100%);min-height:100vh;background:linear-gradient(#171717,#262323);padding:14px 10px 28px}
-.top{height:52px;display:flex;align-items:center;justify-content:center;position:relative}
-.back{position:absolute;left:0;width:34px;height:34px;border:0;border-radius:7px;background:#303030;color:#fff;font-size:24px}
-.logo{font-size:27px;font-weight:1000;font-style:italic;color:#ff4a28;text-shadow:2px 2px #7b170e;letter-spacing:-1px}
-.pool{border:3px solid #675b5b;border-radius:11px;background:#0c0c0c;box-shadow:0 3px 0 #000;padding:7px;margin-top:8px}
-.bar{height:28px;background:#171717;border-radius:5px 5px 0 0;text-align:center;color:#777;font-size:11px;font-weight:bold;padding-top:7px}
-.machine{height:245px;overflow:hidden;position:relative;background:radial-gradient(circle,#444,#111 68%);border:2px solid #090909}
-.machine:after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;background:#777;opacity:.28}
-.machine.instant{display:flex;align-items:center;justify-content:center}
-.single-card{width:115px;text-align:center;animation:pop .35s ease-out}
-.single-card img{width:95px;height:120px;object-fit:contain;filter:drop-shadow(0 5px 4px #000)}
-.track{display:flex;gap:10px;position:absolute;top:0;left:0;height:100%;align-items:center;transition:transform 4.5s cubic-bezier(.08,.82,.15,1)}
-.reel{width:88px;height:100%;display:flex;flex-direction:column;justify-content:space-around;align-items:center;background:linear-gradient(90deg,#090909,#252525,#090909);border-left:2px solid #000;border-right:2px solid #000;padding:12px 0}
-.reel img{width:63px;height:62px;object-fit:contain;filter:drop-shadow(0 3px 3px #000)}
-.pointer{position:absolute;z-index:5;left:50%;top:0;bottom:0;width:3px;background:#f22;box-shadow:0 0 10px #f22;transform:translateX(-50%);opacity:.8}
-.congrats{margin-top:8px;border:2px solid #574d4d;border-radius:5px;background:#050505;min-height:175px}
-.ctitle{height:35px;background:#171717;text-align:center;font-size:18px;font-weight:900;color:#aaa;padding-top:7px}
-.result{padding:12px;text-align:center;display:none}
-.result.show{display:block;animation:pop .35s}
-.result img{width:82px;height:88px;object-fit:contain;filter:drop-shadow(0 4px 3px #000)}
-.rank{display:inline-block;padding:3px 9px;border-radius:5px;font-weight:900;font-size:12px;margin-left:5px}
-.SP{background:#e92cf5}.A{background:#ffcf25;color:#111}.B{background:#35a7ff}.C{background:#8a8a8a}
-.name{font-weight:700;margin-top:3px}.price{color:#ff3a28;font-weight:900;margin-top:4px}
-.points{height:28px;margin-top:8px;background:#171717;border-radius:5px;text-align:center;padding-top:6px;color:#ddd;font-size:12px;font-weight:bold}
-.controls{display:flex;gap:7px;margin-top:16px}
-button{font-family:inherit;cursor:pointer}
-.mode,.qty{flex:1;border:1px solid #796d6d;background:#4a4141;color:#fff;border-radius:8px;padding:10px 5px;font-weight:900}
-.mode.active{background:#e83b25;border-color:#ff725f}
-.draw{width:100%;margin-top:10px;padding:15px;border:2px solid #7b160d;border-radius:10px;background:linear-gradient(#ff4d2e,#d92818);color:#fff;font-size:20px;font-weight:1000;box-shadow:0 4px 0 #66150e}
-.draw:disabled{opacity:.5}
-.skip{width:100%;margin-top:8px;padding:10px;border:1px solid #777;border-radius:8px;background:#5c5151;color:#fff;font-weight:bold}
-.info{font-size:11px;color:#999;text-align:center;margin-top:10px;line-height:1.5}
-@keyframes pop{from{transform:scale(.65);opacity:0}to{transform:scale(1);opacity:1}}
-.shake{animation:shake .45s infinite}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,"Noto Sans Thai",sans-serif;background:#111;color:#111}
+body{display:flex;justify-content:center;align-items:flex-start;padding:18px}
+.phone{width:390px;min-height:820px;border:8px solid #050505;border-radius:42px;background:#f5f7f8;overflow:hidden;box-shadow:0 10px 40px #0008;position:relative}
+.top{height:38px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;letter-spacing:2px;color:#e33}
+.screen{min-height:774px;background:linear-gradient(#fff,#eef3f6);position:relative}
+.header{padding:10px 16px;display:flex;justify-content:space-between;align-items:center}.back{font-size:25px}.logo{font-weight:900;font-style:italic;color:#f4512a;font-size:24px}
+.hero{margin:4px 14px 10px;background:linear-gradient(90deg,#ff7d00,#ffb000);padding:5px;border-radius:8px;color:#fff;font-weight:900}.hero small{display:block;background:#fff;color:#222;border-radius:6px;padding:8px}
+.stats{margin:0 12px;background:#fff;border-radius:8px;box-shadow:0 2px 8px #0002;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}.stats div{padding:7px 2px;border-right:1px solid #eee;font-size:12px}.stats b{display:block;font-size:12px}.history{margin:0 12px;text-align:right;color:#e22;font-weight:800;font-size:11px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:10px 10px 82px}.card{background:#fff;border-radius:7px;overflow:hidden;position:relative;text-align:center;box-shadow:0 1px 5px #0002}.pic{height:91px;background:linear-gradient(#8bc4f0,#eaf6ff);display:flex;align-items:center;justify-content:center;font-size:38px}.tag{position:absolute;right:3px;top:3px;background:#f22;color:#fff;border-radius:4px;padding:3px 5px;font-size:11px;font-weight:900}.tag.a{background:#ffcf00;color:#111}.card small{display:block;height:25px;overflow:hidden;padding:3px;font-size:9px}.price{color:red;font-weight:900;font-size:10px;padding-bottom:5px}
+.drawbar{position:absolute;bottom:0;left:0;right:0;background:#fff;padding:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.draw{background:linear-gradient(#ff2c22,#e10d0d);color:#fff;border:0;border-radius:5px;padding:7px 1px;font-weight:900;font-size:14px;cursor:pointer}.draw small{display:block;font-size:8px}
+.overlay{position:absolute;inset:0;background:#0008;display:none;z-index:10}.overlay.show{display:block}
+.sheet{position:absolute;bottom:0;left:0;right:0;background:#f8f8f8;border-radius:14px 14px 0 0;padding:12px;min-height:300px}.sheet h3{margin:0 0 10px}.balance{background:#202020;color:#fff;border-radius:5px;padding:12px}.balance b{display:block;font-size:20px;margin-top:5px}.payrow{display:flex;justify-content:space-between;align-items:center;margin:10px 0;background:#fff;padding:10px;border-radius:5px}.paybtn{width:100%;background:red;color:#fff;border:0;padding:12px;border-radius:4px;font-weight:900;font-size:15px;cursor:pointer}
+.anim{position:absolute;inset:0;background:#080808;z-index:20;display:none;color:#fff}.anim.show{display:block}.animtitle{text-align:center;color:#ff4d24;font-size:28px;font-weight:900;font-style:italic;padding:18px}.machine{margin:0 18px;border:5px solid #625353;border-radius:10px;background:#151515;height:420px;padding:14px}.reel{height:130px;background:linear-gradient(#111,#333,#111);display:flex;align-items:center;justify-content:center;gap:14px;overflow:hidden}.reel span{font-size:40px;transition:transform .15s}.congrats{height:190px;margin-top:12px;border:3px solid #514848;border-radius:7px;background:#000;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:10px}.result{width:105px;background:#fff;color:#111;border-radius:6px;text-align:center;padding:5px;font-size:10px}.result .emoji{font-size:45px}.skip{display:block;margin:20px auto;background:#8b8181;color:#fff;border:2px solid #222;border-radius:8px;padding:10px 38px;font-weight:900;cursor:pointer}
+.toast{position:absolute;top:48px;left:14px;right:14px;background:#fff;border:3px solid #ff9800;border-radius:8px;padding:7px;display:none;z-index:30}.toast.show{display:block}.toast b{color:#f00}
+.controls{padding:10px 14px;background:#fff;border-top:1px solid #ddd;font-size:12px}.switch{display:inline-flex;align-items:center;gap:8px}.switch input{display:none}.slider{width:38px;height:20px;border-radius:20px;background:#aaa;position:relative}.slider:after{content:"";width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:.2s}.switch input:checked+.slider{background:red}.switch input:checked+.slider:after{left:20px}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="top"><button class="back">‹</button><div class="logo">PRIZE POOL</div></div>
+<div class="phone">
+  <div class="top">JOYPOP</div>
+  <div class="screen">
+    <div class="header"><span class="back">‹</span><div class="logo">HIGH DROPS</div><span>◉</span></div>
+    <div class="hero">CONGRATULATIONS <small>👤 JoyPop User <span style="float:right">Just Got: <b>฿30.00</b></span></small></div>
+    <div class="stats">
+      <div>SP<b>1.15%</b></div><div>A<b>3%</b></div><div>B<b>12%</b></div><div>C<b>83.85%</b></div>
+    </div>
+    <div class="history">▣ HISTORY</div>
+    <div class="cards">
+      <div class="card"><div class="pic">🧴</div><span class="tag">SP</span><small>ICHITAN Honey Lemon</small><div class="price">฿550.00</div></div>
+      <div class="card"><div class="pic">🥤</div><span class="tag">SP</span><small>Energy Drink</small><div class="price">฿450.00</div></div>
+      <div class="card"><div class="pic">🧃</div><span class="tag">SP</span><small>Est Cola</small><div class="price">฿280.00</div></div>
+      <div class="card"><div class="pic">🧃</div><span class="tag">SP</span><small>Puriku</small><div class="price">฿200.00</div></div>
+      <div class="card"><div class="pic">🍵</div><span class="tag">SP</span><small>Oishi Green Tea</small><div class="price">฿180.00</div></div>
+      <div class="card"><div class="pic">🥤</div><span class="tag">SP</span><small>Sponsor Go Zero</small><div class="price">฿150.00</div></div>
+      <div class="card"><div class="pic">☕</div><span class="tag a">A</span><small>Coffee</small><div class="price">฿60.00</div></div>
+      <div class="card"><div class="pic">🧃</div><span class="tag a">A</span><small>Orange Drink</small><div class="price">฿60.00</div></div>
+      <div class="card"><div class="pic">💧</div><span class="tag a">A</span><small>Drinking Water</small><div class="price">฿30.00</div></div>
+    </div>
+    <div class="drawbar">
+      <button class="draw" onclick="buy(1)">x1<small>DRAW</small></button>
+      <button class="draw" onclick="buy(3)">x3<small>DRAW</small></button>
+      <button class="draw" onclick="buy(5)">x5<small>DRAW</small></button>
+      <button class="draw" onclick="buy(10)">x10<small>DRAW</small></button>
+    </div>
+    <div class="controls"><label class="switch">Animation <input id="animation" type="checkbox" checked><span class="slider"></span></label></div>
 
-  <div class="pool">
-    <div class="bar">joypop-style free demo</div>
-    <div id="machine" class="machine instant">
-      <div id="instantCard" class="single-card"></div>
-      <div id="reels" class="track"></div>
-      <div id="pointer" class="pointer"></div>
+    <div class="overlay" id="pay">
+      <div class="sheet">
+        <h3>Pay Now</h3>
+        <div class="balance">▣ Wallet Balance<b>฿11.10</b></div>
+        <div class="payrow">🎟 Vouchers <b style="color:red">4 Pcs ›</b></div>
+        <p style="font-size:11px;color:#777">🛡 Certified Algorithm — 100% Fairness</p>
+        <p>Total <b style="color:red" id="total">1 draw　฿5.00</b></p>
+        <button class="paybtn" onclick="pay()">Pay Now</button>
+      </div>
     </div>
 
-    <div class="congrats">
-      <div class="ctitle">CONGRATULATIONS</div>
-      <div id="result" class="result"></div>
+    <div class="anim" id="anim">
+      <div class="animtitle">PRIZE POOL</div>
+      <div class="machine">
+        <div class="reel" id="reel"><span>💧</span><span>🧃</span><span>🥤</span><span>🧴</span><span>💧</span></div>
+        <div class="congrats" id="results"></div>
+      </div>
+      <button class="skip" onclick="finish()">SKIP ▶</button>
     </div>
-    <div class="points">Points +0.00</div>
+    <div class="toast" id="toast">CONGRATULATIONS <span style="float:right">Just Got: <b id="got">฿6.00</b></span></div>
   </div>
-
-  <div class="controls">
-    <button class="mode active" data-mode="instant">SKIP / ทันที</button>
-    <button class="mode" data-mode="anim">ดู Animation</button>
-  </div>
-  <div class="controls">
-    <button class="qty active" data-q="1">x1</button>
-    <button class="qty" data-q="3">x3</button>
-    <button class="qty" data-q="5">x5</button>
-    <button class="qty" data-q="10">x10</button>
-  </div>
-  <button id="draw" class="draw">DRAW</button>
-  <button id="skip" class="skip">SKIP ⏩</button>
-  <div class="info">FREE DRAW DEMO — ใช้การสุ่มในเครื่อง ไม่หักเงินจริง<br>SP / A / B / C เป็นตัวอย่างสำหรับทดสอบระบบ</div>
 </div>
-
 <script>
-const prizes = {
-  SP:{rank:"SP",name:"SP Prize",price:100, chance:.2,
-      img:"https://img.joypop.gg/uploads/images/goods/85/goods2297.webp?x-oss-process=image/resize,w_400/format,webp"},
-  A:{rank:"A",name:"A Prize",price:30,chance:1.5,
-      img:"https://img.joypop.gg/uploads/images/goods/85/goods2325.webp?x-oss-process=image/resize,w_400/format,webp"},
-  B:{rank:"B",name:"B Prize",price:6,chance:28,
-      img:"https://img.joypop.gg/uploads/images/goods/85/goods2333.webp?x-oss-process=image/resize,w_400/format,webp"},
-  C:{rank:"C",name:"C Prize",price:3,chance:70.3,
-      img:"https://img.joypop.gg/uploads/images/goods/85/goods2339.webp?x-oss-process=image/resize,w_400/format,webp"}
+let packs=1;
+const results={
+  C:{emoji:"🪪",name:"JOYPOP Postcard",price:"฿0.10"},
+  A:{emoji:"🥤",name:"Drinking Water",price:"฿6.00"},
+  SP:{emoji:"🧴",name:"ICHITAN Honey Lemon",price:"฿550.00"}
 };
-
-let mode="instant", qty=1, current=null, busy=false;
-
-function weightedRandom(){
-  const r=Math.random()*100; let n=0;
-  for(const p of Object.values(prizes)){ n+=p.chance; if(r<n)return p; }
-  return prizes.C;
+function buy(n){
+  packs=n;
+  document.getElementById("total").textContent=`${n} draw　฿${(n*5).toFixed(2)}`;
+  document.getElementById("pay").classList.add("show");
 }
-function renderResult(p){
-  result.innerHTML=`<img src="${p.img}" alt="${p.rank}">
-    <div><span class="name">${p.name}</span><span class="rank ${p.rank}">${p.rank}</span></div>
-    <div class="price">฿${p.price.toFixed(2)}</div>`;
-  result.classList.add("show");
+function pay(){
+  document.getElementById("pay").classList.remove("show");
+  const anim=document.getElementById("animation").checked;
+  if(anim){showAnimation();} else {finish();}
 }
-function makeReels(){
-  reels.innerHTML="";
-  const arr=Object.values(prizes);
-  for(let c=0;c<3;c++){
-    const reel=document.createElement("div"); reel.className="reel";
-    for(let i=0;i<5;i++){
-      const p=arr[(i+c*2)%arr.length];
-      const im=document.createElement("img"); im.src=p.img; reel.appendChild(im);
-    }
-    reels.appendChild(reel);
-  }
+function makeResults(){
+  let arr=[];
+  for(let i=0;i<packs;i++) arr.push(i===0 && packs>=5?"SP":(Math.random()<.1?"A":"C"));
+  return arr;
 }
-function centerTrack(){
-  const targetIndex=12;
-  const itemW=98;
-  const center=(machine.clientWidth/2)-(itemW/2);
-  reels.style.transform=`translateX(${center-targetIndex*itemW}px)`;
+function showAnimation(){
+  const a=document.getElementById("anim"), r=document.getElementById("reel");
+  a.classList.add("show");
+  r.style.transform="translateX(0)";
+  setTimeout(()=>{r.style.transform="translateX(-80px)";},120);
+  setTimeout(()=>{r.style.transform="translateX(60px)";},260);
+  setTimeout(()=>{renderResults();},700);
 }
-function draw(){
-  if(busy)return;
-  busy=true; result.classList.remove("show"); result.innerHTML="";
-  current=weightedRandom();
-
-  if(mode==="instant"){
-    machine.className="machine instant";
-    instantCard.innerHTML=`<img src="${current.img}" alt="${current.rank}">
-      <div><span class="rank ${current.rank}">${current.rank}</span></div>`;
-    renderResult(current);
-    busy=false;
-  }else{
-    machine.className="machine shake";
-    instantCard.innerHTML="";
-    makeReels();
-    reels.style.transition="none"; reels.style.transform="translateX(0)";
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        reels.style.transition="transform 4.5s cubic-bezier(.08,.82,.15,1)";
-        // decorative reel spin; final prize is controlled by the local RNG
-        const itemW=98, target=12;
-        const center=(machine.clientWidth/2)-(itemW/2);
-        const offset=center-target*itemW;
-        reels.style.transform=`translateX(${offset}px)`;
-      });
-    });
-    setTimeout(()=>{
-      machine.className="machine";
-      renderResult(current);
-      busy=false;
-    },4700);
-  }
+function renderResults(){
+  const box=document.getElementById("results"); box.innerHTML="";
+  makeResults().forEach(t=>{
+    const x=results[t];
+    box.innerHTML+=`<div class="result"><div class="emoji">${x.emoji}</div><b>${t}</b><br>${x.name}<br>${x.price}</div>`;
+  });
 }
-draw.onclick=draw;
-skip.onclick=()=>{ if(current && busy){ busy=false; machine.className="machine"; renderResult(current); } };
-
-document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); mode=b.dataset.mode;
-});
-document.querySelectorAll(".qty").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll(".qty").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); qty=+b.dataset.q;
-});
-makeReels();
+function finish(){
+  document.getElementById("anim").classList.remove("show");
+  renderResults();
+  const first=document.querySelector(".result b");
+  document.getElementById("got").textContent=(first?.textContent==="SP"?"฿550.00":"฿6.00");
+  const t=document.getElementById("toast");t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2200);
+}
 </script>
 </body>
 </html>
